@@ -6,7 +6,7 @@ import { latLonTo3dPosition, latLonTo3dRotation } from '../../../../lib'
 import useMainStore from '../../../../store/useMainStore'
 
 export const PointContext = React.createContext()
-const Point = forwardRef(({ latLon: [lat, lon], rad, children, fullModelScale }, ref) => {
+const Point = forwardRef(({ coordinate: [lat, lon], rad, children, fullModelScale, modelRad, modelName }, ref) => {
   const setFocusTarget = useMainStore.useSetFocusTarget()
 
   const [modelRef, setModelRef] = React.useState(null)
@@ -27,7 +27,7 @@ const Point = forwardRef(({ latLon: [lat, lon], rad, children, fullModelScale },
   }
 
   return (
-    <PointContext.Provider value={{setModelRef, position, rotation}}>
+    <PointContext.Provider value={{setModelRef, position, rotation, modelRad, modelName}}>
       <mesh ref={ref} position={pointPosition}
             onClick={onClick}
       >
