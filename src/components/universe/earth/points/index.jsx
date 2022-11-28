@@ -18,17 +18,10 @@ const Points = () => {
             rad={3}
             ref={pointRefs[index]}
             fullModelScale={point.fullModelScale}>
-            {({setModelRef, position, rotation}) => {
-              return (
-                <Model
-                  setModelRef={setModelRef}
-                  position={position}
-                  rotation={rotation}
-                  rad={point.modelRad}
-                  modelName={point.modelName}
-                  ref={modelRefs[index]} />
-              )
-            }}
+              <Model
+                rad={point.modelRad}
+                modelName={point.modelName}
+                ref={modelRefs[index]} />
           </Point>
       ))}
     </group>
