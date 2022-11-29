@@ -6,6 +6,7 @@ import Model from "./Model";
 import {PointContext} from "./Point";
 import Flag from "./flag";
 import Navigation from "./navigation";
+import Population from "./population";
 
 export const CarouselContext = React.createContext()
 const Carousel = () => {
@@ -20,6 +21,10 @@ const Carousel = () => {
     },
     {
       component: Flag,
+      ref: React.useRef()
+    },
+    {
+      component: Population,
       ref: React.useRef()
     }
   ]
