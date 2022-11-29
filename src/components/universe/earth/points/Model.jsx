@@ -7,9 +7,9 @@ import useMainStore from '../../../../store/useMainStore'
 import gsap from 'gsap'
 import {PointContext} from "./Point";
 
-const Model = React.forwardRef(({ modelName, rad }, ref) => {
+const Model = () => {
 
-  const {setModelRef, position, rotation} = React.useContext(PointContext)
+  const {modelRef: ref, position, rotation, modelName, modelRad: rad} = React.useContext(PointContext)
 
   const setFocusTarget = useMainStore.useSetFocusTarget()
 
@@ -25,13 +25,12 @@ const Model = React.forwardRef(({ modelName, rad }, ref) => {
   React.useEffect(() => {
     if (ref.current !== null) {
       ref.current.rotation.set(...rotation,'YXZ')
-      setModelRef(ref)
     }
   }, [ref.current])
 
   return (
     <primitive ref={ref} object={gltf.scene} position={fixPosition} scale={[0,0,0]} onClick={onModelClick}/>
   )
-})
+}
 
 export default Model

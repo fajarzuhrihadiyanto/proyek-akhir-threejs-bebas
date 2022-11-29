@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React  from 'react'
 
 import gsap from 'gsap'
 
@@ -6,10 +6,11 @@ import { latLonTo3dPosition, latLonTo3dRotation } from '../../../../lib'
 import useMainStore from '../../../../store/useMainStore'
 
 export const PointContext = React.createContext()
-const Point = forwardRef(({ latLon: [lat, lon], rad, children, fullModelScale }, ref) => {
+const Point = ({ coordinate: [lat, lon], rad, children, fullModelScale, modelRad, modelName }) => {
   const setFocusTarget = useMainStore.useSetFocusTarget()
 
-  const [modelRef, setModelRef] = React.useState(null)
+  const ref = React.useRef()
+  const modelRef = React.useRef()
 
   const position = latLonTo3dPosition(lat, lon)
   const pointPosition = position.map(e => e * rad)
@@ -27,7 +28,9 @@ const Point = forwardRef(({ latLon: [lat, lon], rad, children, fullModelScale },
   }
 
   return (
-    <PointContext.Provider value={{setModelRef, position, rotation}}>
+    <PointContext.Provider value={{
+      // setModelRef,
+      position, rotation, modelRad, modelName, modelRef}}>
       <mesh ref={ref} position={pointPosition}
             onClick={onClick}
       >
@@ -41,6 +44,6 @@ const Point = forwardRef(({ latLon: [lat, lon], rad, children, fullModelScale },
       { children }
     </PointContext.Provider>
   )
-})
+}
 
 export default Point
