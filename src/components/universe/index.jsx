@@ -37,7 +37,7 @@ const Universe = () => {
 
         gsap.timeline({paused: false})
           .to(camera.position, {duration: .5, y: 3})
-          .to(controls.current, {duration: .5, minDistance: 0.35, maxDistance: 0.35, maxPolarAngle: Math.PI/2,
+          .to(controls.current, {duration: .5, minDistance: 0.5, maxDistance: 0.5, maxPolarAngle: Math.PI/2,
             // autoRotate: true
           })
         //#endregion  //*======== Animate Zoom In To Focused Object ===========
