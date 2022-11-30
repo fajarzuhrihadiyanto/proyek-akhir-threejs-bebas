@@ -6,11 +6,11 @@ import { latLonTo3dPosition, latLonTo3dRotation } from '../../../../lib'
 import useMainStore from '../../../../store/useMainStore'
 
 export const PointContext = React.createContext()
-const Point = ({ coordinate: [lat, lon], rad, children, fullModelScale, modelRad, modelName }) => {
+const Point = ({ coordinate: [lat, lon], rad, children, ...rest }) => {
   const setFocusTarget = useMainStore.useSetFocusTarget()
 
   const ref = React.useRef()
-  const modelRef = React.useRef()
+  const carouselRef = React.useRef()
 
   const position = latLonTo3dPosition(lat, lon)
   const pointPosition = position.map(e => e * rad)
@@ -23,14 +23,13 @@ const Point = ({ coordinate: [lat, lon], rad, children, fullModelScale, modelRad
   }, [ref.current])
 
   const onClick = () => {
-    setFocusTarget(modelRef.current)
-    gsap.to(modelRef.current.scale, {duration: .2, x: fullModelScale, y: fullModelScale, z: fullModelScale})
+    setFocusTarget(carouselRef.current)
+    gsap.to(carouselRef.current.scale, {duration: .2, x: 1, y: 1, z: 1})
   }
 
   return (
     <PointContext.Provider value={{
-      // setModelRef,
-      position, rotation, modelRad, modelName, modelRef}}>
+      carouselRef, position, rotation, ...rest}}>
       <mesh ref={ref} position={pointPosition}
             onClick={onClick}
       >
