@@ -11,7 +11,7 @@ import Population from "./population";
 export const CarouselContext = React.createContext()
 const Carousel = () => {
 
-  const {carouselRef: ref, position, rotation} = React.useContext(PointContext)
+  const {carouselRef: ref, position, rotation, isFocus} = React.useContext(PointContext)
   const fixedPosition = position.map(e => e * 3)
 
   const objects = [
@@ -32,15 +32,17 @@ const Carousel = () => {
   const [shownObject, setShownObject] = React.useState(0)
 
   React.useEffect(() => {
-    objects.forEach((object, index) => {
-      const scale = Array(3).fill(index === shownObject)
-      gsap.to(object.ref.current.scale, {duration: .2, x: scale[0], y: scale[1], z: scale[2]})
-    })
-  }, [shownObject])
+    if (isFocus) {
+      objects.forEach((object, index) => {
+        const scale = Array(3).fill(index === shownObject)
+        gsap.to(object.ref.current.scale, {duration: .2, x: scale[0], y: scale[1], z: scale[2]})
+      })
+    }
+  }, [shownObject, isFocus])
 
   return (
     <CarouselContext.Provider value={{len: objects.length, setShownObject}}>
-      <group ref={ref} position={fixedPosition} rotation={[...rotation, 'YXZ']} scale={Array(3).fill(0)}>
+      <group ref={ref} position={fixedPosition} rotation={[...rotation, 'YXZ']} scale={Array(3).fill(0)} visible={isFocus}>
         <Navigation />
         {objects.map(Object => (
           <Object.component ref={Object.ref}/>
