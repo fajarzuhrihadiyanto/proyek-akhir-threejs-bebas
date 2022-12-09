@@ -12,7 +12,6 @@ export const CarouselContext = React.createContext()
 const Carousel = () => {
 
   const {carouselRef: ref, position, rotation, isFocus} = React.useContext(PointContext)
-  const fixedPosition = position.map(e => e * 3)
 
   const objects = [
     {
@@ -42,7 +41,7 @@ const Carousel = () => {
 
   return (
     <CarouselContext.Provider value={{len: objects.length, setShownObject}}>
-      <group ref={ref} position={fixedPosition} rotation={[...rotation, 'YXZ']} scale={Array(3).fill(0)} visible={isFocus}>
+      <group ref={ref} position={position} rotation={[...rotation, 'YXZ']} scale={Array(3).fill(0)} visible={isFocus}>
         <Navigation />
         {objects.map(Object => (
           <Object.component ref={Object.ref}/>
