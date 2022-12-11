@@ -35,12 +35,9 @@ const Earth = () => {
   
   return (
     <group ref={ref}>
-      <mesh position={[0,0,0]}>
+      <mesh position={[0,0,0]} receiveShadow castShadow>
         <sphereGeometry args={[radius, widthSegments, heightSegments, phiStart]}/>
-        <meshStandardMaterial
-          map={map}
-          side={THREE.DoubleSide}
-        />
+        <meshStandardMaterial map={map} />
       </mesh>
       <EarthCityLight/>
       <Points />

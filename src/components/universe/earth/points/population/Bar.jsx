@@ -14,14 +14,14 @@ const Bar = ({year, x, pop, height, color}) => {
   return (
     <group>
       <group position={[x - 0.015, height / 2 + 0.03, 0]}>
-        <mesh>
+        <mesh castShadow>
           <textGeometry args={[`${year}`, {font, size: .01, height: .002}]}/>
         </mesh>
-        <mesh position={[0,-.011,0]}>
+        <mesh castShadow position={[0,-.011,0]}>
           <textGeometry args={[formattedPopulation, {font, size: .005, height: .002}]}/>
         </mesh>
       </group>
-      <mesh position={[x,0,0]}>
+      <mesh position={[x,0,0]} castShadow>
         <boxGeometry args={[.03, height,.03]}/>
         <meshStandardMaterial color={color}/>
       </mesh>

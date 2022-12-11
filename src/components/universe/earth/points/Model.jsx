@@ -22,6 +22,13 @@ const Model = React.forwardRef((_, ref) => {
 
   const gltf = useLoader(GLTFLoader, `/models/${code.toUpperCase()}.glb`)
 
+  Object.keys(gltf.nodes).forEach(nodeKey => {
+    if (gltf.nodes[nodeKey].isMesh) {
+      gltf.nodes[nodeKey].castShadow = true
+      gltf.nodes[nodeKey].receiveShadow = true
+    }
+  })
+
   const onModelClick = () => {
     removeFocus()
     setFocusTarget(null)
