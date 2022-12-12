@@ -30,6 +30,7 @@ const Sun = () => {
         args={[lightColor, radius]}
         position={position}
         intensity={1}
+        castShadow
       />
 
       <Selection>
