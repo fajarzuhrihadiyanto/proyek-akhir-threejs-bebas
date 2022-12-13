@@ -161,8 +161,8 @@ export default {
   },
   cn: {
     model: {
-      fullScale: .02,
-      altitude: 0
+      fullScale: .003,
+      altitude: -0.09
     }
   }
 }
