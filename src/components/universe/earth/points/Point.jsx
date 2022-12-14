@@ -43,7 +43,6 @@ const Point = ({ code, coordinate, rad = 3, children, isFocus, focusFn, removeFo
     // onClickStatus = !onClickStatus
     // alert('onClickStatus is ' + onClickStatus) // Status is true
     // if (onClickStatus) {alert('onClickStatus is ' + onClickStatus)}
-    alert('isFocus : ' + isFocus)
   }
 
   const onHoverIn = () => {
